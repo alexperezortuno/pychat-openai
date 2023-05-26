@@ -113,7 +113,7 @@ if __name__ == "__main__":
         subparser = parser.add_subparsers(title='Script select', dest='script_type')
         parser.version = '0.0.1'
         parser.add_argument("-v", "--version", action="version")
-        parser.add_argument("-t", "--topic", type=str, default="lenguaje python", help="topic to be used")
+        parser.add_argument("-t", "--topic", type=str, default="Python", help="topic to be used")
         parser.add_argument("-i", "--inputs", type=str, default="text", help="Inputs to be used")
         parser.add_argument("-o", "--outputs", type=str, default="text", help="Outputs to be used")
         parser.add_argument("--title", type=str, default="OpenAI", help="Title for interface")
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         parser.add_argument("-r", "--role", type=str,
                             default="Eres un ingeniero de software experto en {{topic}}{{sub-role}}.",
                             help="Role to be used")
-        parser.add_argument("--sub-role", type=str, default="que trabaja en una empresa de telecomunicaciones",
+        parser.add_argument("--sub-role", type=str, default="que trabaja en una empresa de TI",
                             help="additional role to be used")
 
         params: Dict = vars(parser.parse_args())
