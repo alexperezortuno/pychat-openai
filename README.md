@@ -10,11 +10,11 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-python main.py
+python openai.gradio
 ```
 
 ```bash
-python main.py --help
+python openai.gradio --help
 ```
 
 ### Documentation
