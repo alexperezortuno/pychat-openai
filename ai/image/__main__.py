@@ -4,9 +4,9 @@ import sys
 
 from typing import Dict, Any
 
-from ai.core.openai import Core
+from ai.core.openai_core import OpenAiCore
 
-openai_instance = Core()
+openai_instance = OpenAiCore()
 
 abs_path: str = os.path.dirname(os.path.abspath(__file__))
 father_path: str = os.path.dirname(abs_path)
