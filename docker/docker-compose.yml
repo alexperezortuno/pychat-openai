@@ -1,0 +1,48 @@
+version: '3.7'
+services:
+    openai:
+        image: mainopenai:1.0.0
+        container_name: openai
+        ports:
+            - "8080:8080"
+            - "8082:8082"
+            - "8083:8083"
+            - "8084:8084"
+        environment:
+            - OPENAPI_KEY=$OPENAPI_KEY
+            - TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
+        depends_on:
+            - redis-primary
+            - redis-secondary
+
+    redis-primary:
+        image: redis:latest
+        container_name: redis-primary
+        ports:
+            - "6379:6379"
+        command: redis-web /etc/redis/redis.conf
+        volumes:
+            - redis_data:/data
+            - ./conf/redis.conf:/etc/redis/redis.conf
+        environment:
+            - REDIS_REPLICATION_MODE=master
+
+    redis-secondary:
+        image: redis:latest
+        container_name: redis-secondary
+        depends_on:
+            - redis-primary
+        expose:
+            - "6379"
+        command: redis-web /etc/redis/redis.conf
+        volumes:
+            - ./conf/redis.conf:/etc/redis/redis.conf
+        environment:
+            - REDIS_REPLICATION_MODE=slave
+            - REDIS_MASTER_HOST=redis-primary
+            - REDIS_MASTER_PORT=6379
+            - REDIS_MASTER_PASSWORD=$REDIS_MASTER_PASSWORD
+            - REDIS_REPLICATION_PASSWORD=$REDIS_SLAVE_PASSWORD
+
+volumes:
+    redis_data:

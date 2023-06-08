@@ -88,6 +88,7 @@ class OpenAiCore:
         parser.add_argument("-u", "--url", type=str, default=default_params["url"], help="Url to be used")
         parser.add_argument("--in-browser", type=bool, default=default_params["in_browser"], help="Open in browser")
         parser.add_argument("-m", "--method", type=str, default=default_params["method"], help="Method to be used")
+        parser.add_argument("--root-path", type=str, default=None, help="Root path to be used in gradio mode")
         parser.add_argument("--log-level", type=str, default=default_params["log_level"])
         parser.add_argument("--log-format", type=str, default=default_params["log_format"])
 
@@ -241,6 +242,7 @@ class OpenAiCore:
                       root_path=self.params['root_path'],
                       inbrowser=self.params['in_browser'])
         except Exception as exc:
+            self.logger.error(f"{self.params['title']}: {exc}")
             raise RuntimeError(f"{exc}")
 
     def start_gradio_image(self):

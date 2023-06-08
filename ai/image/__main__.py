@@ -31,7 +31,7 @@ if __name__ == "__main__":
         parser.add_argument("-t", "--topic", type=str, default="Illustration", help="Topic to be used")
         parser.add_argument("-n", type=int, default=2, help="Number of samples to be used")
         parser.add_argument("--size", type=str, default="512x512", help="Size to be used")
-        parser.add_argument("--response_format", type=str, default="b64_json", help="Response format to be used")
+        parser.add_argument("--response_format", type=str, default="b64_json", help="ResponseModel format to be used")
         parser.add_argument("-r", "--role", type=str,
                             default="You are a digital artist specializing in {{topic}}{{sub-role}}.",
                             help="Role to be used")
