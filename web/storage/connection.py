@@ -1,9 +1,11 @@
+import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:97531Changa#@161.35.205.177:6543/openaidb"
+SQLALCHEMY_DATABASE_URL = f"postgresql://postgres:{os.getenv('DB_PASS', 'postgres')}@{os.getenv('DB_HOST', 'localhost')}:{os.getenv('DB_PORT', 5432)}/{os.getenv('DB_NAME', 'mydb')}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
