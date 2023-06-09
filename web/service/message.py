@@ -51,7 +51,7 @@ def get_by_role_and_username(db: Session, role: str, username: str) -> ChatEntit
 
 def set_chat(db: Session, chat_model: ChatModel) -> ChatEntity:
     key_id: str = random_str(25, 4)
-    print(key_id)
+
     db_chat = ChatEntity(
         key_id=key_id,
         username=chat_model.username,
