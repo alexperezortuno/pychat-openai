@@ -246,5 +246,3 @@ if __name__ == "__main__":
                 host=os.getenv('APP_HOST', "0.0.0.0"),
                 port=int(os.getenv('APP_PORT', 8000)),
                 log_level=str(os.getenv('LOG_LEVEL', 'info')).lower())
-    # pwd = get_password_hash("A0m1n97531#")
-    # print(pwd)
