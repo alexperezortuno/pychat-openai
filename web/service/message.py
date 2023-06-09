@@ -24,6 +24,7 @@ def get_chats(db: Session, username: str) -> [ChatEntity] or None:
     try:
         chats: [ChatEntity] = db.query(ChatEntity).filter(ChatEntity.username == username).all()
         logger.debug(chats)
+        return chats
     except Exception as ex:
         logger.error(f"get_chats: {ex}")
         return None
