@@ -9,3 +9,5 @@ sqlalchemy==2.0.15
 redis==4.5.5
 pylint==2.17.4
 telegram==0.0.1
+python-jose==3.3.0
+psycopg2-binary==2.9.6

@@ -11,6 +11,7 @@ class RedisClient:
     def __init__(self):
         self.redis_instance = redis.Redis(host=os.getenv("REDIS_HOST", 'redis'),
                                           port=os.getenv("REDIS_PORT", 6379),
+                                          password=os.getenv("REDIS_PASSWORD", None),
                                           db=os.getenv("REDIS_DB", 0))
 
     def get_chat_data(self, chat_id):
