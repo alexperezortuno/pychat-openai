@@ -29,6 +29,8 @@ if __name__ == "__main__":
     try:
         parser = openai_instance.parser()
         parser.add_argument("-t", "--topic", type=str, default="Illustration", help="Topic to be used")
+        parser.add_argument("--gradio", type=bool, default=True, help="Activate gradio mode")
+        parser.add_argument("--telegram", type=bool, default=False, help="Activate telegram bot")
         parser.add_argument("-n", type=int, default=2, help="Number of samples to be used")
         parser.add_argument("--size", type=str, default="512x512", help="Size to be used")
         parser.add_argument("--response_format", type=str, default="b64_json", help="ResponseModel format to be used")

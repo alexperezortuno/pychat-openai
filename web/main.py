@@ -15,7 +15,7 @@ from datetime import timedelta
 from sqlalchemy.orm import Session
 from starlette.middleware.gzip import GZipMiddleware
 
-from ai.core.commons import log_lvl, log_str
+from ai.core.commons import APP_HOST, APP_PORT, LOG_LEVEL, LOG_FORMAT
 from ai.core.logger import get_logger
 from web.common.response_code import ResponseCode
 from web.service.auth import SECRET_KEY, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token, \
@@ -54,7 +54,7 @@ app.mount("/static", StaticFiles(directory="web/static"), name="static")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 templates = Jinja2Templates(directory="web/templates")
-logger = get_logger(log_lvl, log_str, __name__)
+logger = get_logger(LOG_LEVEL, LOG_FORMAT, __name__)
 
 
 def get_db():
@@ -243,6 +243,6 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(app,
-                host=os.getenv('APP_HOST', "0.0.0.0"),
-                port=int(os.getenv('APP_PORT', 8000)),
-                log_level=str(os.getenv('LOG_LEVEL', 'info')).lower())
+                host=APP_HOST,
+                port=APP_PORT,
+                log_level=LOG_LEVEL.lower())

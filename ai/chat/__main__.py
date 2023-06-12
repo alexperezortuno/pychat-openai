@@ -4,6 +4,7 @@ import sys
 
 from typing import Dict, Any, List
 
+from ai.core.commons import ROLE, TELEGRAM, TOPIC, GRADIO
 from ai.core.openai_core import OpenAiCore
 from ai.core.telegram_core import TelegramCore
 
@@ -39,10 +40,11 @@ def start(start_params: Dict) -> None:
 if __name__ == "__main__":
     try:
         parser = openai_instance.parser()
-        parser.add_argument("-t", "--topic", type=str, default="Python", help="topic to be used")
+        parser.add_argument("-t", "--topic", type=str, default=TOPIC, help="topic to be used")
+        parser.add_argument("--gradio", type=bool, default=True, help="Activate gradio mode")
         parser.add_argument("--telegram", type=bool, default=False, help="Activate telegram bot")
         parser.add_argument("-r", "--role", type=str,
-                            default="Eres una IA muy eficaz y experta en {{topic}} respondes dudas enseñas con tutoriales y/o ejemplos a un ingeniero de software, que trabaja en una empresa de TI.",
+                            default=ROLE,
                             help="Role to be used")
 
         params: Dict = vars(parser.parse_args())

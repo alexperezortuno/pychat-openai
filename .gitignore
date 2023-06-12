@@ -163,3 +163,4 @@ cython_debug/
 conversationbot
 docker/*
 *.txt
+.env

@@ -8,7 +8,8 @@ import openai
 from io import BytesIO
 from typing import List, Any, Dict
 from PIL import Image
-from ai.core.commons import log_lvl, log_str, OPENAPI_KEY
+from ai.core.commons import LOG_LEVEL, LOG_FORMAT, OPENAPI_KEY, VERSION, GRADIO_PORT, OPENAI_MODEL, GRADIO_INPUTS, \
+    GRADIO_OUTPUTS, GRADIO_TITLE, DEBUG, GRADIO, SHARE, AUTH, DOMAIN, IN_BROWSER, METHOD, TELEGRAM
 from ai.core.logger import get_logger
 
 openai.api_key = OPENAPI_KEY
@@ -28,7 +29,7 @@ class OpenAiCore:
         self.messages = []
         self.params = {}
         self.file_name = ""
-        self.logger = get_logger(log_lvl, log_str, __name__)
+        self.logger = get_logger(LOG_LEVEL, LOG_FORMAT, __name__)
 
     @staticmethod
     def repeat_string(string: str, times: int = 140) -> str:
@@ -43,21 +44,22 @@ class OpenAiCore:
     @staticmethod
     def default_params() -> Dict:
         response: Dict = {
-            "version": "0.0.1",
-            "port": 7860,
-            "model": "gpt-3.5-turbo",
-            "inputs": "text",
-            "outputs": "text",
-            "title": "OpenAI",
-            "debug": False,
-            "gradio": True,
-            "share": False,
-            "auth": None,
-            "url": "localhost",
-            "in_browser": False,
-            "method": "http",
-            "log_level": log_lvl,
-            "log_format": log_str,
+            "version": VERSION,
+            "port": GRADIO_PORT,
+            "model": OPENAI_MODEL,
+            "inputs": GRADIO_INPUTS,
+            "outputs": GRADIO_OUTPUTS,
+            "title": GRADIO_TITLE,
+            "debug": DEBUG,
+            "gradio": GRADIO,
+            "telegram": TELEGRAM,
+            "share": SHARE,
+            "auth": AUTH,
+            "url": DOMAIN,
+            "in_browser": IN_BROWSER,
+            "method": METHOD,
+            "log_level": LOG_LEVEL,
+            "log_format": LOG_FORMAT,
         }
 
         return response
@@ -83,6 +85,7 @@ class OpenAiCore:
         parser.add_argument("--title", type=str, default=default_params["title"], help="Title for interface")
         parser.add_argument("-d", "--debug", type=bool, default=default_params["debug"], help="Debug mode")
         parser.add_argument("--gradio", type=bool, default=default_params["gradio"], help="Activate gradio mode")
+        parser.add_argument("--telegram", type=bool, default=default_params["telegram"], help="Activate telegram mode")
         parser.add_argument("-s", "--share", type=bool, default=default_params["share"], help="Share mode")
         parser.add_argument("--auth", type=str, default=default_params["auth"], help="Auth to be used")
         parser.add_argument("-u", "--url", type=str, default=default_params["url"], help="Url to be used")
