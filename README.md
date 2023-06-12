@@ -14,13 +14,17 @@ python openai.gradio
 ```
 
 ```bash
-python openai.gradio --help
+python -m web.main
+```
+
+```bash
+python -m ai.chat -r "Eres una IA experta en Traefik y Go, sirves de ayuda al usuario para implementar, configurar y resolver problemas de Traefik y GO" --gradio true
 ```
 
 ## Run Server
 
 ```bash
-flask --app web.main run --reload --debug
+python -n web.main
 ```
 
 ### Documentation
