@@ -2,6 +2,7 @@ import os
 
 import redis
 
+from ai.core.commons import REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_DB
 from ai.core.utils import random_str
 
 
@@ -9,10 +10,10 @@ class RedisClient:
     redis_instance: redis.Redis
 
     def __init__(self):
-        self.redis_instance = redis.Redis(host=os.getenv("REDIS_HOST", 'redis'),
-                                          port=os.getenv("REDIS_PORT", 6379),
-                                          password=os.getenv("REDIS_PASSWORD", None),
-                                          db=os.getenv("REDIS_DB", 0))
+        self.redis_instance = redis.Redis(host=REDIS_HOST,
+                                          port=REDIS_PORT,
+                                          password=REDIS_PASSWORD,
+                                          db=REDIS_DB)
 
     def get_chat_data(self, chat_id):
         return self.redis_instance.hgetall(f"chat:{chat_id}")

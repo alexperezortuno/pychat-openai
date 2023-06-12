@@ -1,12 +1,11 @@
-#!/usr/bin/env python
-import os
+# -*- coding: utf-8 -*-
 from typing import Dict
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
-from ai.core.commons import log_lvl, log_str
+from ai.core.commons import log_lvl, log_str, SECRET_KEY, ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM
 from ai.core.logger import get_logger
 from web.storage.entity.user_entity import UserEntity
 from web.storage.model.token import TokenData
@@ -14,9 +13,6 @@ from web.storage.model.user_model import UserModelInDB, UserModel
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
 
-SECRET_KEY = os.environ.get("SECRET_KEY", b"bae9543379d8475aa52bd5898fa5a737899a7c5bb4a9b09beec45190e615603d")
-ALGORITHM = os.environ.get("ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = os.environ.get("ACCES_TOKEN_EXPIRE_MINUTES", 30)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 logger = get_logger(log_lvl, log_str, __name__)

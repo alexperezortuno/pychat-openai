@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from sqlalchemy.orm import Session
 
 from ai.core.commons import log_lvl, log_str

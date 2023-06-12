@@ -8,10 +8,10 @@ import openai
 from io import BytesIO
 from typing import List, Any, Dict
 from PIL import Image
-from ai.core.commons import log_lvl, log_str
+from ai.core.commons import log_lvl, log_str, OPENAPI_KEY
 from ai.core.logger import get_logger
 
-openai.api_key = os.getenv("OPENAPI_KEY", "YOUR_API_KEY")
+openai.api_key = OPENAPI_KEY
 
 
 class OpenAiCore:

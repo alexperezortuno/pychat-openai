@@ -1,7 +1,5 @@
-#!/usr/bin/env python
-import json
+# -*- coding: utf-8 -*-
 import os
-import pickle
 from typing import Annotated
 
 from fastapi import FastAPI, Request, Depends, HTTPException, status
@@ -15,7 +13,6 @@ from fastapi.responses import RedirectResponse
 from datetime import timedelta
 
 from sqlalchemy.orm import Session
-from starlette.middleware import Middleware
 from starlette.middleware.gzip import GZipMiddleware
 
 from ai.core.commons import log_lvl, log_str
@@ -32,6 +29,9 @@ from web.storage.model.message_model import MessageModel
 from web.storage.model.response_model import ResponseModel
 from web.storage.model.token import Token
 from web.storage.model.user_model import UserModel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 connection.Base.metadata.schema = "openai"
 connection.Base.metadata.create_all(bind=engine)

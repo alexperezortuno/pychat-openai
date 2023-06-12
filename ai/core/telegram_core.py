@@ -5,7 +5,7 @@ from typing import Any, Dict
 from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes, PicklePersistence
 
-from ai.core.commons import log_lvl, log_str
+from ai.core.commons import log_lvl, log_str, TELEGRAM_BOT_TOKEN
 from ai.core.logger import get_logger
 from ai.core.openai_core import OpenAiCore
 from ai.core.redis_client import RedisClient
@@ -24,11 +24,11 @@ class TelegramCore:
 
     def __init__(self) -> None:
         self.logger = get_logger(log_lvl, log_str, __name__)
-        if os.getenv("TELEGRAM_BOT_TOKEN", None) is not None:
-            self.bot = telegram.Bot(os.getenv("TELEGRAM_BOT_TOKEN"))
+        if TELEGRAM_BOT_TOKEN is not None:
+            self.bot = telegram.Bot(TELEGRAM_BOT_TOKEN)
             self.persistence = PicklePersistence(filepath="conversationbot")
             self.application_builder = ApplicationBuilder()\
-                .token(os.getenv("TELEGRAM_BOT_TOKEN"))\
+                .token(TELEGRAM_BOT_TOKEN)\
                 .persistence(self.persistence).build()
 
     # Handle /start command
