@@ -55,7 +55,7 @@ class OpenAiCore:
             "telegram": TELEGRAM,
             "share": SHARE,
             "auth": AUTH,
-            "url": DOMAIN,
+            "domain": DOMAIN,
             "in_browser": IN_BROWSER,
             "method": METHOD,
             "log_level": LOG_LEVEL,
@@ -83,12 +83,12 @@ class OpenAiCore:
         parser.add_argument("-i", "--inputs", type=str, default=default_params["inputs"], help="Inputs to be used")
         parser.add_argument("-o", "--outputs", type=str, default=default_params["outputs"], help="Outputs to be used")
         parser.add_argument("--title", type=str, default=default_params["title"], help="Title for interface")
-        parser.add_argument("-d", "--debug", type=bool, default=default_params["debug"], help="Debug mode")
+        parser.add_argument("--debug", type=bool, default=default_params["debug"], help="Debug mode")
         parser.add_argument("--gradio", type=bool, default=default_params["gradio"], help="Activate gradio mode")
         parser.add_argument("--telegram", type=bool, default=default_params["telegram"], help="Activate telegram mode")
         parser.add_argument("-s", "--share", type=bool, default=default_params["share"], help="Share mode")
         parser.add_argument("--auth", type=str, default=default_params["auth"], help="Auth to be used")
-        parser.add_argument("-u", "--url", type=str, default=default_params["url"], help="Url to be used")
+        parser.add_argument("-d", "--domain", type=str, default=default_params["domain"], help="Domain to be used")
         parser.add_argument("--in-browser", type=bool, default=default_params["in_browser"], help="Open in browser")
         parser.add_argument("-m", "--method", type=str, default=default_params["method"], help="Method to be used")
         parser.add_argument("--root-path", type=str, default=None, help="Root path to be used in gradio mode")
@@ -188,7 +188,7 @@ class OpenAiCore:
             self.transcript(f"{abs_route}", input_str)
 
             first_message: str = self.messages[0]
-            last_four_messages: str = self.messages[-4:]
+            last_four_messages: List[Any] = self.messages[-4:]
 
             self.logger.debug(f"first_message: {first_message}")
             self.logger.debug(f"last_four_messages: {last_four_messages}")
@@ -213,6 +213,7 @@ class OpenAiCore:
 
             return gpt_response
         except Exception as exc:
+            self.logger.error(f"{exc}")
             raise RuntimeError(f"{exc}")
 
     def image_gpt(self, user_input) -> List[str] or List[Image]:
@@ -240,7 +241,7 @@ class OpenAiCore:
             gr.launch(share=self.params['share'],
                       debug=self.params['debug'],
                       server_port=self.params['port'],
-                      server_name=self.params['url'],
+                      server_name=self.params['domain'],
                       auth=self.params['auth'],
                       root_path=self.params['root_path'],
                       inbrowser=self.params['in_browser'])
@@ -258,7 +259,7 @@ class OpenAiCore:
             gr.launch(share=self.params['share'],
                       debug=self.params['debug'],
                       server_port=self.params['port'],
-                      server_name=self.params['url'],
+                      server_name=self.params['domain'],
                       auth=self.params['auth'],
                       inbrowser=self.params['in_browser'])
         except Exception as exc:
