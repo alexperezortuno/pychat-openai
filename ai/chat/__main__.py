@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import os
 import sys
+from typing import Dict
 
-from typing import Dict, Any, List
-
-from ai.core.commons import ROLE, TELEGRAM, TOPIC, GRADIO
+from ai.core.commons import ROLE, TOPIC
 from ai.core.openai_core import OpenAiCore
 from ai.core.telegram_core import TelegramCore
 
