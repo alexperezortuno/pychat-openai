@@ -164,3 +164,4 @@ conversationbot
 docker/*
 *.txt
 .env
+*:Zone.Identifier
